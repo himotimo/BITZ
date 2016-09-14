@@ -4,21 +4,21 @@
  * and open the template in the editor.
  */
 package bitzgame.bitz;
+
 import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author Timo
  */
-public class Collectible extends GameObject{
+public class Collectible extends GameObject {
+
     private String name;
-    private int value; 
+    private int value;
 
     public Collectible(double nowx, double nowy, String sprpath, String itemname) throws SlickException {
-        super(nowx, nowy, sprpath, itemname);        
+        super(nowx, nowy, sprpath, itemname);
         name = itemname;
     }
-    
-    
-    
+
 }
