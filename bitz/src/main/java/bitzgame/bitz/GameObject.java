@@ -15,13 +15,13 @@ import org.newdawn.slick.SlickException;
  */
 public class GameObject {
 
-    private double x;
-    private double y;
+    private float x;
+    private float y;
     private int value;
     private Image sprite;
     private String name;
 
-    public GameObject(double nowx, double nowy, String sprpath) throws SlickException {
+    public GameObject(float nowx, float nowy, String sprpath) throws SlickException {
         x = nowx;
         y = nowy;
         sprite = new Image(sprpath);
@@ -47,7 +47,7 @@ public class GameObject {
         return null;
     }
 
-    public GameObject(double nowx, double nowy, String sprpath, String itemname) throws SlickException {
+    public GameObject(float nowx, float nowy, String sprpath, String itemname) throws SlickException {
         x = nowx;
         y = nowy;
         sprite = new Image(sprpath);
@@ -74,19 +74,19 @@ public class GameObject {
         return this.sprite;
     }
 
-    public void moveX(double addX) {
+    public void moveX(float addX) {
         this.x += addX;
     }
 
-    public void moveY(double addY) {
+    public void moveY(float addY) {
         this.y += addY;
     }
 
-    public double getY() {
+    public float getY() {
         return this.y;
     }
 
-    public double getX() {
+    public float getX() {
         return this.x;
     }
 

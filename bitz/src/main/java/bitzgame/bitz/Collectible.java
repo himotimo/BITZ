@@ -16,7 +16,7 @@ public class Collectible extends GameObject {
     private String name;
     private int value;
 
-    public Collectible(double nowx, double nowy, String sprpath, String itemname) throws SlickException {
+    public Collectible(float nowx, float nowy, String sprpath, String itemname) throws SlickException {
         super(nowx, nowy, sprpath, itemname);
         name = itemname;
     }

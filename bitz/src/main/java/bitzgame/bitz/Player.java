@@ -17,7 +17,7 @@ public class Player extends GameObject {
 
     public Player(int nowx, int nowy, String sprpath) throws SlickException {
         super(nowx, nowy, sprpath);
-        System.out.println("Player luotu!!!!!!!!!!");
+        System.out.println("Player luotu!!!");
         inventory = new Inventory();
     }
 
