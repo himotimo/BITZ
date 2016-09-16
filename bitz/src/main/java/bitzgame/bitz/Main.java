@@ -113,7 +113,7 @@ public class Main extends BasicGame {
         //newimg.draw(gc.getInput().getMouseX(), gc.getInput().getMouseY());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SlickException {
         try {
             AppGameContainer appgc;
             appgc = new AppGameContainer(new Main("Simple Slick Game"));
