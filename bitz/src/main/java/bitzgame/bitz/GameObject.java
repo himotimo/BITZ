@@ -27,6 +27,22 @@ public class GameObject {
         sprite = new Image(sprpath);
     }
 
+    public boolean renderable(Camera other) {
+        if (other == null) {    //checking if this is near the game screen
+            return false;
+        }
+        float leftEdge = other.getX() - 50;
+        float rightEdge = leftEdge + 740;
+        float upEdge = other.getY() - 50;
+        float downEdge = upEdge + 580;
+        if (this.getX() > leftEdge && this.getX() < rightEdge) {
+            if (this.getY() > upEdge && this.getY() < downEdge) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean collidesWith(GameObject other) {
         if (this != other) {
             if (this.getX() > other.getX() - 20 && this.getX() < other.getY() + 20) {

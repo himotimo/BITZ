@@ -23,6 +23,7 @@ public class Main extends BasicGame {
     ArrayList<GameObject> renderList;
     ArrayList<Collectible> collectList;
     Camera mainCamera;
+    Walls jere;
 
     public Main(String gamename) {
         super(gamename);
@@ -35,13 +36,24 @@ public class Main extends BasicGame {
         crest = new Collectible(200, 200, "src/assets/spr_item_crest.png", "crest");
         stick = new Collectible(300, 300, "src/assets/spr_item_stick.png", "stick");
         timo = new Player(0, 0, "src/assets/spr_char1.png");
-        mainCamera = new Camera(-100,-100);
+        mainCamera = new Camera(-200, -200);
+        jere = new Walls();
+        for(int i = 0; i<10; i++){
+            for(int j = 0;j<10;j++){
+                GameObject wall = jere.getWallArray()[i][j];
+                if(wall!=null){
+                    renderList.add(wall);
+                }
+            }
+        }
         renderList.add(crest);
         renderList.add(stick);
         collectList.add(crest);
         collectList.add(stick);
         input = new Input(480); //
         gameslow = 4; //the bigger value the slower game is. used to divide delta.
+        
+        
     }
 
     public float moveRight() {
@@ -78,8 +90,8 @@ public class Main extends BasicGame {
         deltaspd /= gameslow; //makes running slower
         timo.moveX(deltaspd * moveLeft() + deltaspd * moveRight());  //move timo
         timo.moveY(deltaspd * moveUp() + deltaspd * moveDown());
-        mainCamera.setX(timo.getX()-100);
-        mainCamera.setY(timo.getY()-100);
+        mainCamera.setX(timo.getX() - 200);
+        mainCamera.setY(timo.getY() - 200);
 
         Collectible j = (Collectible) timo.collidesAny(collectList);
         if (j != null) {
@@ -96,9 +108,10 @@ public class Main extends BasicGame {
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        timo.getSprite().draw(100,100);
         for (GameObject j : renderList) {      //draw objects on the 'object' list
-            j.getSprite().draw((float) j.getX()-mainCamera.getX(), (float) j.getY()-mainCamera.getY());
+            if (j.renderable(mainCamera)) {
+                j.getSprite().draw((float) j.getX() - mainCamera.getX(), (float) j.getY() - mainCamera.getY());
+            }
         }
 
         int var = 1;        //draw inventory and the items in it
@@ -109,8 +122,7 @@ public class Main extends BasicGame {
             }
             var++;
         }
-        //newimg.draw(x_pos, y_pos);
-        //newimg.draw(gc.getInput().getMouseX(), gc.getInput().getMouseY());
+        timo.getSprite().draw(200, 200);
     }
 
     public static void main(String[] args) throws SlickException {
