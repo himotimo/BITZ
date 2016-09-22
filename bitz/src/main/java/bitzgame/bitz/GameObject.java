@@ -15,16 +15,24 @@ import org.newdawn.slick.SlickException;
  */
 public class GameObject {
 
-    private float x;
-    private float y;
-    private int value;
+    protected float x;
+    protected float y;
+    protected int value;
     private Image sprite;
     private String name;
+    protected int direction;
 
     public GameObject(float nowx, float nowy, String sprpath) throws SlickException {
         x = nowx;
         y = nowy;
         sprite = new Image(sprpath);
+    }
+
+    public GameObject(float nowx, float nowy, String sprpath, int dir) throws SlickException {
+        x = nowx;
+        y = nowy;
+        sprite = new Image(sprpath);
+        direction = dir;
     }
 
     public boolean renderable(Camera other) {
@@ -104,6 +112,14 @@ public class GameObject {
 
     public float getX() {
         return this.x;
+    }
+
+    public int getDirection() {
+        return this.direction;
+    }
+
+    public void setDirection(int dir) {
+        this.direction = dir;
     }
 
 }

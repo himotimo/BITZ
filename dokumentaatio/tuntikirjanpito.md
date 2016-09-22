@@ -7,4 +7,9 @@ Päivä | Tunnit | Kuvaus
 8.9.2016 | 1h | Aiheen suunnittelua
 9.9.2016 | 5h | Aiheen suunnittelua ja pelikoodauksen aloitus
 14.9.2016 | 3h | Koodausta ja checkstylen lisäys
+16.9.2016 | 3h | Koodausta ja testien selvittelyä
+18.9.2016 | 2h | Seinien lisäystä ja testien selvittelyä
+22.9.2016 | 3h | koodausta ja checkstylen ja pit-raportin selvittelyä sekä luokkakaavion lisäys
+22.9.2016 | 3h | koodausta
+23.9.2016 | 2h | koodausta
 ... | ... | ...

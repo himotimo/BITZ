@@ -10,28 +10,29 @@ package bitzgame.bitz;
  * @author Timo
  */
 public class Camera {
+
     private float x;
     private float y;
-    
-    public Camera(float nowX, float nowY){
+
+    public Camera(float nowX, float nowY) {
         this.x = nowX;
         this.y = nowY;
     }
-    
-    public float getX(){
+
+    public float getX() {
         return this.x;
     }
-    
-    public void setX(float nowX){
+
+    public void setX(float nowX) {
         this.x = nowX;
     }
-    
-    public float getY(){
+
+    public float getY() {
         return this.y;
     }
-    
-    public void setY(float nowY){
+
+    public void setY(float nowY) {
         this.y = nowY;
     }
-    
+
 }

@@ -51,7 +51,7 @@ public class MainTest {
         GameTestCtx.inputQueue.put(() -> {
             try {
                 Image test = new Image("src/assets/spr_item_crest.png");
-                if (test != null) {
+                if (test == null) {
                     throw new Exception();
                 }
                 return GameTestCtx.ok;
