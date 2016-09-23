@@ -42,6 +42,9 @@
                     <jvmArgs>
                         <value>-Djava.library.path=${project.basedir}/target/natives</value>
                     </jvmArgs>
+                    <timeoutConstant>
+                        <value>-DtimeoutConst=1000</value>
+                    </timeoutConstant>
                 </configuration>
             </plugin>
             <plugin>

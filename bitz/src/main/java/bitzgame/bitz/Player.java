@@ -32,6 +32,10 @@ public class Player extends GameObject {
         bangCoolDown = 0;               //checks 
         
     }
+    
+    public void setTryShoot(boolean b){
+        this.tryShoot = b;
+    }
 
     public void tryShoot(float deltaspd) throws SlickException {
         if (input.isKeyDown(Input.KEY_T)&&this.bangCoolDown<=0) {
