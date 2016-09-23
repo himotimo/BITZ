@@ -21,6 +21,11 @@ public class GameObject {
     private Image sprite;
     private String name;
     protected int direction;
+    
+    public GameObject(float nowx, float nowy) throws SlickException {
+        x = nowx;
+        y = nowy;
+    }
 
     public GameObject(float nowx, float nowy, String sprpath) throws SlickException {
         x = nowx;

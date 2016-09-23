@@ -23,6 +23,13 @@ class OkResult extends Throwable {
     
 }
 
+class ErrMsg extends Throwable {
+    String errmsg;
+    ErrMsg(String e){
+        errmsg = e;
+    }
+}
+
 class GameTestCtx extends BasicGame implements Runnable {
 
     static AppGameContainer container;

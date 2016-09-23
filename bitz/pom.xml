@@ -38,6 +38,11 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
+                <configuration>
+                    <jvmArgs>
+                        <value>-Djava.library.path=${project.basedir}/target/natives</value>
+                    </jvmArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.googlecode.mavennatives</groupId>

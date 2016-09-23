@@ -62,5 +62,25 @@ public class MainTest {
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
     }
+    
+    @Test
+    public void test1() throws InterruptedException {
+        // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
+        GameTestCtx.inputQueue.put(() -> {
+            try {
+                GameObject g = new GameObject(0,0);
+                Camera c = new Camera(0,0);
+                if(g.renderable(c)){
+                    return GameTestCtx.ok;
+                } else {
+                    return new ErrMsg("ei kameran sisällä");
+                }
+            } catch (Exception e) {
+                return e;
+            }
+        });
+        Throwable ex = GameTestCtx.returnQueue.take();
+        assertEquals("Did it work?", ex, GameTestCtx.ok);
+    }
 
 }
