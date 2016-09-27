@@ -19,8 +19,8 @@ import org.newdawn.slick.SlickException;
 */
 
 @FunctionalInterface
-interface CheckedSupplier<R> {
-   R get() throws Throwable;
+interface Test {
+   void runTest() throws Exception;
 }
 
 // A stateless class for signaling the "no errors or exceptions" case.
@@ -36,7 +36,7 @@ class OkResult extends Throwable {
 }
 
 // A class for returning an error message to signal error cases in the tests.
-class ErrMsg extends Throwable {
+class ErrMsg extends Exception {
     String errmsg;
     ErrMsg(String e){
         errmsg = e;
@@ -45,14 +45,16 @@ class ErrMsg extends Throwable {
 
 class GameTestCtx extends BasicGame implements Runnable {
     
+    public static OkResult ok;
     public static GameTestCtx theOneContext; // Unfortunately there can be only
                                              // one per process, due to the limitations of Slick2D
     private final AppGameContainer container;
-    private final BlockingQueue<CheckedSupplier<Throwable>> inputQueue;
+    private final BlockingQueue<Test> inputQueue;
     private final BlockingQueue<Throwable> returnQueue;
 
     public GameTestCtx(String title) throws SlickException {
         super(title);
+            ok = new OkResult();
             container = new AppGameContainer(this);
             inputQueue = new ArrayBlockingQueue<>(1);
             returnQueue = new ArrayBlockingQueue<>(1);
@@ -65,20 +67,18 @@ class GameTestCtx extends BasicGame implements Runnable {
     @Override
     public void update(GameContainer gc, int i) throws SlickException {
         System.out.println("GameTestCtx.update: Start a new frame.");
-        CheckedSupplier<Throwable> test;
         try {
-            test = inputQueue.take();
-            Throwable result;
+            Test test = inputQueue.take();
             try {
-                result = test.get();
-            } catch (Throwable res) {
-                result = res;
+                test.runTest();
+                returnQueue.put(ok);
+            } catch (Exception res) {
+                returnQueue.put(res);
             }
-            returnQueue.put(result);
+            System.out.println("GameTestCtx.update: One test successfully run.");
         } catch (InterruptedException ex) {
             System.out.println("Update method: Exception: " + ex);
         } 
-        System.out.println("GameTestCtx.update: One test successfully run.");
     }
 
     @Override
@@ -92,7 +92,7 @@ class GameTestCtx extends BasicGame implements Runnable {
             container.start();
 
         } catch (SlickException ex) {
-            
+            System.out.println("Error: Can't initialize the Game Test Context.");
         }
     }
 
@@ -106,13 +106,13 @@ class GameTestCtx extends BasicGame implements Runnable {
         return theOneContext;
     }
     
-    public Throwable runInLoop(CheckedSupplier<Throwable> test) {
+    public Throwable runInLoop(Test test) {
         try {
             inputQueue.put(test);
             return returnQueue.take();
-        } catch (Exception e) {
-            System.out.println("runInLoop method: Error while sending the test to another thread: " + e);
-            return null;
+        } catch (InterruptedException e) {
+            System.out.println("runInLoop method: Error while sending the test to another thread, trying again: " + e);
+            return this.runInLoop(test);
         }
     }
 }

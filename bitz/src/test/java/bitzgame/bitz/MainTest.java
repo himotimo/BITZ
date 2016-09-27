@@ -39,8 +39,7 @@ public class MainTest {
     public void imageTest() {
         Throwable result = gameLoop.runInLoop(() -> {
             Image test = new Image("src/assets/spr_item_crest.png");
-            return new OkResult();
         });
-        assertEquals("Did it work?", new OkResult(), result);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
 }

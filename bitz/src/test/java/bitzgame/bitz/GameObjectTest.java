@@ -31,52 +31,48 @@ public class GameObjectTest {
     }
 
     @Test
-    public void gameObjectRenderableTest1() throws InterruptedException {
+    public void gameObjectRenderableTest1() {
 
         Throwable result = gameLoop.runInLoop(() -> {
             GameObject g = new GameObject(0, 0);
             Camera c = new Camera(0, 0);
             if (!g.renderable(c)) {
-                throw new Exception();
+                throw new ErrMsg("");
             }
-            return new OkResult();
         });
 
-        assertEquals("Did it work?", new OkResult(), result);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
 
     @Test
-    public void gameObjectRenderableTest2() throws InterruptedException {
+    public void gameObjectRenderableTest2() {
 
         Throwable result = gameLoop.runInLoop(() -> {
             GameObject g = new GameObject(0, 0);
             Camera c = null;
             if (g.renderable(c)) {
-                return new ErrMsg("Object shouldn't be renderable with a Camera that is null!");
+                throw new ErrMsg("Object shouldn't be renderable with a Camera that is null!");
             }
-            return new OkResult();
         });
 
-        assertEquals("Did it work?", new OkResult(), result);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
 
     @Test
-    public void gameObjectCollidesWithTest() throws InterruptedException {
+    public void gameObjectCollidesWithTest() {
         Throwable result = gameLoop.runInLoop(() -> {
             GameObject g = new GameObject(0, 0);
             GameObject gg = new GameObject(1, 1);
             if (g.collidesWith(gg)) {
-                return new OkResult();
-            } else {
-                return new ErrMsg("Doesnt collide");
+                throw new ErrMsg("Doesnt collide");
             }
         });
 
-        assertEquals("Did it work?", new OkResult(), result);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
 
     @Test
-    public void gameObjectCollidesAnyTest() throws InterruptedException {
+    public void gameObjectCollidesAnyTest() {
 
         Throwable result = gameLoop.runInLoop(() -> {
             GameObject g = new GameObject(0, 0);
@@ -85,31 +81,27 @@ public class GameObjectTest {
             ArrayList<GameObject> list = new ArrayList<>();
             list.add(gg);
             list.add(p);
-            if (g.collidesAny(list) != null) {
-                return new OkResult();
-            } else {
-                return new ErrMsg("Doesn't collide with anything");
+            if (g.collidesAny(list) == null) {
+                throw new ErrMsg("Doesn't collide with anything");
             }
         });
 
-        assertEquals("Did it work?", new OkResult(), result);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
 
     @Test
-    public void playerShootTest() throws InterruptedException {
+    public void playerShootTest() {
 
         Throwable result = gameLoop.runInLoop(() -> {
             Input i = new Input(480);
             Player p = new Player(0, 0, "src/assets/spr_item_crest.png", 5, i);
             p.setTryShoot(true);
-            if (p.shoot(2) != null) {
-                return new OkResult();
-            } else {
-                return new ErrMsg("Nothing shot");
+            if (p.shoot(2) == null) {
+                throw new ErrMsg("Nothing shot");
             }
         });
 
-        assertEquals("Did it work?", new OkResult(), result);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
 
 }
