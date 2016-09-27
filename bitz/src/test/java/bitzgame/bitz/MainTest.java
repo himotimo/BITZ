@@ -38,12 +38,8 @@ public class MainTest {
     @Test
     public void imageTest() {
         Throwable result = gameLoop.runInLoop(() -> {
-            try {
-                Image test = new Image("src/assets/spr_item_crest.png");
-                return new OkResult();
-            } catch (Exception e) {
-                return e;
-            }
+            Image test = new Image("src/assets/spr_item_crest.png");
+            return new OkResult();
         });
         assertEquals("Did it work?", new OkResult(), result);
     }

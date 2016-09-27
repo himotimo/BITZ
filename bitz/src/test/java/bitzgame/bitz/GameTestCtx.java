@@ -7,7 +7,6 @@ package bitzgame.bitz;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.function.Supplier;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -18,6 +17,11 @@ import org.newdawn.slick.SlickException;
  *
  * @author Pyry Kontio
 */
+
+@FunctionalInterface
+interface CheckedSupplier<R> {
+   R get() throws Throwable;
+}
 
 // A stateless class for signaling the "no errors or exceptions" case.
 // Meant to be used as a singleton. 
@@ -44,7 +48,7 @@ class GameTestCtx extends BasicGame implements Runnable {
     public static GameTestCtx theOneContext; // Unfortunately there can be only
                                              // one per process, due to the limitations of Slick2D
     private final AppGameContainer container;
-    private final BlockingQueue<Supplier<Throwable>> inputQueue;
+    private final BlockingQueue<CheckedSupplier<Throwable>> inputQueue;
     private final BlockingQueue<Throwable> returnQueue;
 
     public GameTestCtx(String title) throws SlickException {
@@ -61,14 +65,19 @@ class GameTestCtx extends BasicGame implements Runnable {
     @Override
     public void update(GameContainer gc, int i) throws SlickException {
         System.out.println("GameTestCtx.update: Start a new frame.");
-        Supplier<Throwable> test;
+        CheckedSupplier<Throwable> test;
         try {
             test = inputQueue.take();
-            Throwable result = test.get();
+            Throwable result;
+            try {
+                result = test.get();
+            } catch (Throwable res) {
+                result = res;
+            }
             returnQueue.put(result);
         } catch (InterruptedException ex) {
             System.out.println("Update method: Exception: " + ex);
-        }
+        } 
         System.out.println("GameTestCtx.update: One test successfully run.");
     }
 
@@ -97,7 +106,7 @@ class GameTestCtx extends BasicGame implements Runnable {
         return theOneContext;
     }
     
-    public Throwable runInLoop(Supplier<Throwable> test) {
+    public Throwable runInLoop(CheckedSupplier<Throwable> test) {
         try {
             inputQueue.put(test);
             return returnQueue.take();
