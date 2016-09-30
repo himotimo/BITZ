@@ -12,6 +12,13 @@ import org.newdawn.slick.Input;
  *
  * @author Timo
  */
+/**
+     * Luokka hallinnoi pelaajaobjektia
+     *
+     * 
+     *
+     */
+
 public class Player extends GameObject {
 
     private Inventory inventory;
@@ -36,7 +43,15 @@ public class Player extends GameObject {
     public void setTryShoot(boolean b) {
         this.tryShoot = b;
     }
-
+    
+    /**
+     * Metodi koettaa, onko ampuminen mahdollista tässä framessa
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin nopeus
+     * 
+     * 
+     *
+     */
+    
     public void tryShoot(float deltaspd) throws SlickException {
         if (input.isKeyDown(Input.KEY_T) && this.bangCoolDown <= 0) {
             this.tryShoot = true;
@@ -45,6 +60,14 @@ public class Player extends GameObject {
             this.bangCoolDown -= 1 * deltaspd;
         }
     }
+    
+    /**
+     * Metodi koettaa ampua projectilen pelaajan katsomaan suuntaan.
+     *
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin nopeus
+     * 
+     *
+     */
 
     public Projectile shoot(float deltaspd) throws SlickException {
         this.tryShoot(deltaspd);
@@ -60,6 +83,16 @@ public class Player extends GameObject {
     public Shooter getShooter() {
         return this.shooter;
     }
+    
+    
+    /**
+     * Metodi liikuttaa pelaajaa erillisten liikutusfunktioiden avulla.
+     * Tarkistetaan, onko suuntanäppäimet painettuna ja liikutaan niiden suuntaan
+     *
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin nopeus
+     * 
+     *
+     */
 
     public void move(float deltaspd) {
         this.moveX(deltaspd * this.moveLeft() + deltaspd * this.moveRight());  //move timo

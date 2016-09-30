@@ -49,6 +49,13 @@ public class Walls {
         return this.wallArray;
     }
 
+    /**
+     * Metodi luo peliin seiniä/taustatiiliä tekstifileä lukemalla
+     *
+     * 
+     *
+     */
+    
     public void setupArray() throws SlickException {
         int[][] wallsMap = new int[height][width];
         Scanner scanner = null;

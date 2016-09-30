@@ -9,6 +9,13 @@ package bitzgame.bitz;
  *
  * @author Timo
  */
+
+/**
+     * Luokka hallinnoi kameraobjektia, joka seuraa pelaajaa
+     *
+     *
+     */
+
 public class Camera {
 
     private float x;

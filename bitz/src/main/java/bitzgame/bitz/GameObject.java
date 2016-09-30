@@ -13,6 +13,10 @@ import org.newdawn.slick.SlickException;
  *
  * @author Timo
  */
+/**
+ * Luokka antaa perusominaisuudet kaikille pelin objekteille
+ */
+
 public class GameObject {
 
     protected float x;
@@ -40,6 +44,14 @@ public class GameObject {
         direction = dir;
     }
 
+    /**
+     * Metodi kertoo kuuluuko objektia renderöidä.
+     * jos se on "kuvaruudussa", niin sitä tulee renderöidä
+     *
+     * @param other pelin kamera
+     *
+     * @return true tai false tulisiko objektia renderöidä
+     */
     public boolean renderable(Camera other) {
         if (other == null) {    //checking if this is near the game screen
             return false;
@@ -56,6 +68,14 @@ public class GameObject {
         return false;
     }
 
+    /**
+     * Metodi kertoo törmääkö se other objektiin.
+     * 
+     *
+     * @param other toinen objekti
+     *
+     * @return true tai false törmätäänkö tällä hetkellä otheriin
+     */
     public boolean collidesWith(GameObject other) {
         if (this != other) {
             if (this.getX() > other.getX() - 20 && this.getX() < other.getX() + 20) {
@@ -67,6 +87,14 @@ public class GameObject {
         return false;
     }
 
+    /**
+     * Metodi kertoo törmääkö se mihinkään listan objektiin.
+     *
+     * @param other lista objekteja
+     *
+     * @return GameObject johon törmätään, muussa tapauksessa null
+     */
+    
     public GameObject collidesAny(ArrayList<? extends GameObject> other) {
         for (GameObject j : other) {
             if (this.collidesWith(j)) {

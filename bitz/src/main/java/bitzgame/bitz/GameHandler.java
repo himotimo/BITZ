@@ -21,6 +21,14 @@ import org.newdawn.slick.Input;
  *
  * @author Timo
  */
+/**
+     * Luokka hallinnoi pelin init- ja main looppeja, sekä renderöintiä vielä tässä vaiheessa
+     *
+     * 
+     * 
+     *
+     */
+
 public class GameHandler {
 
     private Player timo;

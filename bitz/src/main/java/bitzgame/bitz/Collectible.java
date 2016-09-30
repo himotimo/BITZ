@@ -11,6 +11,11 @@ import org.newdawn.slick.SlickException;
  *
  * @author Timo
  */
+/**
+ * Luokka hallinnoi kerättäviä objekteja
+ *
+ *
+ */
 public class Collectible extends GameObject {
 
     private String name;

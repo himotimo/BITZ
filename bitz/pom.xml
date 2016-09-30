@@ -121,6 +121,11 @@
                     <argLine>-Djava.library.path=${project.basedir}/target/natives</argLine>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+            </plugin> 
         </plugins>
     </build>
 

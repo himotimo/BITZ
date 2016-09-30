@@ -9,6 +9,10 @@ package bitzgame.bitz;
  *
  * @author Timo
  */
+/**
+ * Luokka hallinnoi inventaariota
+ *
+ */
 public class Inventory {
 
     private Collectible[] bag;
@@ -35,6 +39,16 @@ public class Inventory {
         }
         return null;
     }
+    
+    /**
+     * Metodi laittaa inventoryyn Collectible-tavaran
+     *
+     * @param item inventoryyn laitettava objekti
+     * @return boolean pystyttiinkö laittamaan tavara inventoryyn
+     * 
+     * 
+     *
+     */
 
     public boolean put(Collectible item) {
         if (!this.isFull()) {
@@ -51,6 +65,15 @@ public class Inventory {
         return false;
     }
 
+    /**
+     * Metodi tarkistaa, onko inventory täynnä
+     *
+     * @return boolean, onko inventory täynnä
+     * 
+     * 
+     *
+     */
+    
     public boolean isFull() {
         System.out.println("onkotäynnä");
         boolean isfull = true;
