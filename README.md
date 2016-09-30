@@ -5,6 +5,6 @@ Liikkuminen: wasd
 Ammu: t
 Kerää kaikki tavarat niin voitat pelin. 
 
-###[Pit-raportti](https://htmlpreview.github.io/?https://github.com/himotimo/BITZ/blob/master/dokumentaatio/pit-raportti.html).
+###[Pit-raportti](https://htmlpreview.github.io/?https://github.com/himotimo/BITZ/blob/master/dokumentaatio/pit-report.html).
 
 ###[Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/himotimo/BITZ/blob/master/dokumentaatio/checkstyle.html).
