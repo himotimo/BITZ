@@ -12,24 +12,50 @@ import org.newdawn.slick.SlickException;
  * @author Timo
  */
 public class Enemy extends GameObject {
-    
+
     private int health;
-    
+    private float spd;
+
     public Enemy(float nowx, float nowy, String sprpath) throws SlickException {
         super(nowx, nowy, sprpath);
+        spd = (float) (Math.random() * 0.7);
+        if (Math.random() < 0.5) {
+            this.setX(nowx - (float) (Math.random() * 200) - 100);
+        } else {
+            this.setX(nowx + (float) (Math.random() * 200) + 100);
+        }
+        if (Math.random() < 0.5) {
+            this.setY(nowy - (float) (Math.random() * 200) - 100);
+        } else {
+            this.setY(nowy + (float) (Math.random() * 200) + 100);
+        }
+
         health = 2;
     }
-    
-    public int getHealth(){
+
+    public void moveToPlayer(Player other, float deltaspd) {
+        if (this.getX() < other.getX()) {
+            this.moveX((float) spd * deltaspd);
+        } else if (this.getX() > other.getX()) {
+            this.moveX((float) -spd * deltaspd);
+        }
+        if (this.getY() < other.getY()) {
+            this.moveY((float) spd * deltaspd);
+        } else if (this.getY() > other.getY()) {
+            this.moveY((float) -spd * deltaspd);
+        }
+    }
+
+    public int getHealth() {
         return this.health;
     }
-    
-    public void setHealth(int i){
+
+    public void setHealth(int i) {
         this.health = i;
     }
-    
-    public void addToHealth(int i){
+
+    public void addToHealth(int i) {
         this.health += i;
     }
-    
+
 }

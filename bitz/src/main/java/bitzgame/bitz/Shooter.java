@@ -20,6 +20,10 @@ public class Shooter {
         this.projectiles = new ArrayList<Projectile>();
     }
 
+    public ArrayList<Projectile> getProjectiles() {
+        return this.projectiles;
+    }
+
     public Projectile[] moveAllProjectiles(float deltaspd) {
         Projectile[] toBeDestroyed = new Projectile[20];
         int k = 0;

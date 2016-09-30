@@ -12,4 +12,6 @@ Päivä | Tunnit | Kuvaus
 22.9.2016 | 3h | koodausta ja checkstylen ja pit-raportin selvittelyä sekä luokkakaavion lisäys
 22.9.2016 | 3h | koodausta
 23.9.2016 | 2h | koodausta
+29.9.2016 | 2h | koodausta
+30.9.2016 | 2h | koodausta
 ... | ... | ...

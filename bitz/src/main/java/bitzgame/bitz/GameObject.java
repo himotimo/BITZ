@@ -119,6 +119,14 @@ public class GameObject {
         return this.x;
     }
 
+    public void setX(float nowx) {
+        this.x = nowx;
+    }
+
+    public void setY(float nowy) {
+        this.y = nowy;
+    }
+
     public int getDirection() {
         return this.direction;
     }

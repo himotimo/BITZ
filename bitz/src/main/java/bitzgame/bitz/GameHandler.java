@@ -33,8 +33,10 @@ public class GameHandler {
     private ArrayList<Collectible> collectList;
     private Camera mainCamera;
     private Walls jere;
+    private Enemy[] enemies;
 
     public void init(GameContainer gc) throws SlickException {
+        enemies = new Enemy[3];
         renderList = new ArrayList<GameObject>();
         collectList = new ArrayList<Collectible>();
         input = new Input(480);
@@ -61,7 +63,25 @@ public class GameHandler {
 
     public void update(GameContainer gc, int delta) throws SlickException {
         deltaspd = delta;
-        deltaspd /= gameslow; //makes running slower
+        deltaspd /= gameslow; //makes the game run slower
+        for (int i = 0; i < 3; i++) {
+            if (enemies[i] == null) {
+                enemies[i] = new Enemy(timo.getX(), timo.getY(), "src/assets/spr_enemy1.png");
+                renderList.add(enemies[i]);
+            }
+            if (enemies[i] != null) {
+                enemies[i].moveToPlayer(timo, deltaspd);
+                GameObject s = enemies[i].collidesAny(timo.getShooter().getProjectiles());
+                if (s != null) {
+                    renderList.remove(enemies[i]);
+                    enemies[i] = null;
+                    renderList.remove(s);
+                    timo.getShooter().getProjectiles().remove((Projectile) s);
+                    s = null;
+                }
+            }
+        }
+
         timo.move(deltaspd);
         Projectile p = timo.shoot(deltaspd);
         if (p != null) {
@@ -74,8 +94,7 @@ public class GameHandler {
             }
         }
         toBeDestroyed = null;
-        //timo.moveX(deltaspd * moveLeft() + deltaspd * moveRight());  //move timo
-        //timo.moveY(deltaspd * moveUp() + deltaspd * moveDown());
+
         mainCamera.setX(timo.getX() - 200);
         mainCamera.setY(timo.getY() - 200);
 
