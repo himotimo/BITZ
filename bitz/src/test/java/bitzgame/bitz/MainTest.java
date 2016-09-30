@@ -5,16 +5,12 @@
  */
 package bitzgame.bitz;
 
-import java.util.ArrayList;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.function.Supplier;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 //import org.newdawn.slick.Input;
 
 /**
@@ -25,44 +21,27 @@ public class MainTest {
 
     public MainTest() {
     }
-
-    @BeforeClass
-    public static void setUpClass() {
-        GameTestCtx.setup();
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    
+    // Unfortunately it seems that Slick2D supports only one game window per process.
+    // This means that this field can be static as well.
+    GameTestCtx gameLoop;
 
     @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
+    public void setUp() throws SlickException {
+        gameLoop = GameTestCtx.setup();
     }
 
     /**
      * Test of main method, of class Main.
      */
     @Test
-    public void imageTest() throws InterruptedException {
-        // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
-        GameTestCtx.inputQueue.put(() -> {
-            try {
-                Image test = new Image("src/assets/spr_item_crest.png");
-                if (test == null) {
-                    throw new Exception();
-                }
-                return GameTestCtx.ok;
-            } catch (Exception e) {
-                return e;
-            }
+    public void imageTest() {
+        Throwable result = gameLoop.runInLoop(() -> {
+            Image test = new Image("src/assets/spr_item_crest.png");
         });
-        Throwable ex = GameTestCtx.returnQueue.take();
-        assertEquals("Did it work?", ex, GameTestCtx.ok);
+        assertEquals("Did it work?", gameLoop.ok, result);
     }
+
     
     @Test
     public void gameObjectRenderableTest1() throws InterruptedException {
