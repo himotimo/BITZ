@@ -42,6 +42,16 @@
                     <jvmArgs>
                         <value>-Djava.library.path=${project.basedir}/target/natives</value>
                     </jvmArgs>
+                    <targetClasses>
+                        <param>bitzgame.bitz.*</param>
+                    </targetClasses>
+                    <excludedClasses>
+                        <param>bitzgame.bitz.Main</param>
+                    </excludedClasses>
+                    <targetTests>
+                        <param>bitzgame.bitz.*</param>
+                    </targetTests>
+                    <threads>1</threads>
                 </configuration>
             </plugin>
             <plugin>
