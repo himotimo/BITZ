@@ -30,34 +30,34 @@ public class Player extends GameObject {
         shooter = new Shooter(); // this object can shoot projectiles
         tryShoot = false;          //
         bangCoolDown = 0;               //checks 
-        
+
     }
-    
-    public void setTryShoot(boolean b){
+
+    public void setTryShoot(boolean b) {
         this.tryShoot = b;
     }
 
     public void tryShoot(float deltaspd) throws SlickException {
-        if (input.isKeyDown(Input.KEY_T)&&this.bangCoolDown<=0) {
+        if (input.isKeyDown(Input.KEY_T) && this.bangCoolDown <= 0) {
             this.tryShoot = true;
         }
-        if(this.bangCoolDown>0){
-            this.bangCoolDown-= 1*deltaspd;
+        if (this.bangCoolDown > 0) {
+            this.bangCoolDown -= 1 * deltaspd;
         }
     }
-    
+
     public Projectile shoot(float deltaspd) throws SlickException {
         this.tryShoot(deltaspd);
-        if (this.bangCoolDown <= 0&&tryShoot) {
+        if (this.bangCoolDown <= 0 && tryShoot) {
             this.bangCoolDown = 100;
             this.tryShoot = false;
             return this.shooter.shoot(x, y, direction);
-        }else{
+        } else {
             return null;
         }
     }
-    
-    public Shooter getShooter(){
+
+    public Shooter getShooter() {
         return this.shooter;
     }
 

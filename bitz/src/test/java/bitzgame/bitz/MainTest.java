@@ -21,7 +21,6 @@ import org.newdawn.slick.Image;
  *
  * @author Timo
  */
-
 public class MainTest {
 
     public MainTest() {
@@ -64,7 +63,7 @@ public class MainTest {
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
     }
-    /*
+    
     @Test
     public void gameObjectRenderableTest1() throws InterruptedException {
         // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
@@ -82,9 +81,9 @@ public class MainTest {
         });
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
-    }*/
-    
-    /*@Test
+    }
+
+ /*@Test
     public void gameObjectCollidesWithTest() throws InterruptedException {
         // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
         GameTestCtx.inputQueue.put(() -> {
@@ -103,8 +102,7 @@ public class MainTest {
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
     }*/
-    
-    /*@Test
+ /*@Test
     public void gameObjectCollidesAnyTest() throws InterruptedException {
         // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
         GameTestCtx.inputQueue.put(() -> {
@@ -127,8 +125,7 @@ public class MainTest {
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
     }*/
-    
-    /*@Test
+ /*@Test
     public void playerShootTest() throws InterruptedException {
         // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
         GameTestCtx.inputQueue.put(() -> {
@@ -149,8 +146,4 @@ public class MainTest {
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
     }*/
-    
-    
-    
-
 }

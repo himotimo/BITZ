@@ -13,37 +13,36 @@ import org.newdawn.slick.SlickException;
  * @author Timo
  */
 public class Shooter {
+
     public ArrayList<Projectile> projectiles;
-    
-    public Shooter(){
+
+    public Shooter() {
         this.projectiles = new ArrayList<Projectile>();
     }
-    
-    public Projectile[] moveAllProjectiles(float deltaspd){
+
+    public Projectile[] moveAllProjectiles(float deltaspd) {
         Projectile[] toBeDestroyed = new Projectile[20];
         int k = 0;
-        for(Projectile p : projectiles){
+        for (Projectile p : projectiles) {
             p.move(deltaspd);
             p.minusLife();
-            if(p.getLife()<=0){
+            if (p.getLife() <= 0) {
                 toBeDestroyed[k] = p;
             }
             k++;
         }
-        for(int i = 0; i<20;i++){
-            if(toBeDestroyed[i]!=null){
+        for (int i = 0; i < 20; i++) {
+            if (toBeDestroyed[i] != null) {
                 this.projectiles.remove(toBeDestroyed[i]);
             }
         }
         return toBeDestroyed;
     }
-    
-    public Projectile shoot(float startX, float startY, int dir) throws SlickException{
-        Projectile projectile = new Projectile(startX,startY,"src/assets/spr_projectile.png", dir);
+
+    public Projectile shoot(float startX, float startY, int dir) throws SlickException {
+        Projectile projectile = new Projectile(startX, startY, "src/assets/spr_projectile.png", dir);
         this.projectiles.add(projectile);
         return projectile;
     }
-    
-    
-    
+
 }

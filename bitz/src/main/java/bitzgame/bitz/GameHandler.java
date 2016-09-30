@@ -34,7 +34,6 @@ public class GameHandler {
     private Camera mainCamera;
     private Walls jere;
 
-
     public void init(GameContainer gc) throws SlickException {
         renderList = new ArrayList<GameObject>();
         collectList = new ArrayList<Collectible>();
@@ -65,12 +64,12 @@ public class GameHandler {
         deltaspd /= gameslow; //makes running slower
         timo.move(deltaspd);
         Projectile p = timo.shoot(deltaspd);
-        if(p != null){
+        if (p != null) {
             renderList.add(p);
         }
         Projectile[] toBeDestroyed = timo.getShooter().moveAllProjectiles(deltaspd);
-        for(int i = 0; i<20;i++){
-            if(toBeDestroyed[i]!=null){
+        for (int i = 0; i < 20; i++) {
+            if (toBeDestroyed[i] != null) {
                 renderList.remove(toBeDestroyed[i]);
             }
         }

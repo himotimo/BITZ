@@ -21,7 +21,7 @@ public class GameObject {
     private Image sprite;
     private String name;
     protected int direction;
-    
+
     public GameObject(float nowx, float nowy) throws SlickException {
         x = nowx;
         y = nowy;
