@@ -58,7 +58,7 @@ public class GameObject {
 
     public boolean collidesWith(GameObject other) {
         if (this != other) {
-            if (this.getX() > other.getX() - 20 && this.getX() < other.getY() + 20) {
+            if (this.getX() > other.getX() - 20 && this.getX() < other.getX() + 20) {
                 if (this.getY() > other.getY() - 20 && this.getY() < other.getY() + 20) {
                     return true;
                 }

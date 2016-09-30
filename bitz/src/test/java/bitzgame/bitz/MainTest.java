@@ -42,7 +42,7 @@ public class MainTest {
         assertEquals("Did it work?", gameLoop.ok, result);
     }
 
-    
+    /*
     @Test
     public void gameObjectRenderableTest1() throws InterruptedException {
         // NOTE to Timo: Do NOT use assertions inside the () -> { test }! Only catch errors and return them.
@@ -60,7 +60,7 @@ public class MainTest {
         });
         Throwable ex = GameTestCtx.returnQueue.take();
         assertEquals("Did it work?", ex, GameTestCtx.ok);
-    }
+    }*/
 
  /*@Test
     public void gameObjectCollidesWithTest() throws InterruptedException {

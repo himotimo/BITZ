@@ -62,8 +62,8 @@ public class GameObjectTest {
     public void gameObjectCollidesWithTest() {
         Throwable result = gameLoop.runInLoop(() -> {
             GameObject g = new GameObject(0, 0);
-            GameObject gg = new GameObject(1, 1);
-            if (g.collidesWith(gg)) {
+            GameObject gg = new GameObject(0, 0);
+            if (!g.collidesWith(gg)) {
                 throw new ErrMsg("Doesnt collide");
             }
         });
