@@ -14,4 +14,5 @@ Päivä | Tunnit | Kuvaus
 23.9.2016 | 2h | koodausta
 29.9.2016 | 2h | koodausta
 30.9.2016 | 2h | koodausta
+5.10.2016 | 3h | refaktorointia
 ... | ... | ...
