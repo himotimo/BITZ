@@ -69,5 +69,37 @@ public class GameHandler {
         renderer.renderInventory(timo, g);
         renderer.renderPlayer(timo);
     }
-
+    
+    public Player getPlayer(){
+        return this.timo;
+    }
+    
+    public Input getInput(){
+        return this.input;
+    }
+    
+    public float getGameslow(){
+        return this.gameslow;
+    }
+    
+    public float getDeltaspd(){
+        return this.deltaspd;
+    }
+    
+    public ArrayList<GameObject> getRenderList(){
+        return this.renderList;
+    }
+    
+    public Camera getCamera(){
+        return this.mainCamera;
+    }
+    
+    public Logic getLogic(){
+        return this.logiikka;
+    }
+    
+    public BitzRenderer getRenderer(){
+        return this.renderer;
+    }
+    
 }

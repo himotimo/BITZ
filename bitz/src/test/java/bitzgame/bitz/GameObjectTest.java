@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 //import org.newdawn.slick.Input;
@@ -28,6 +29,39 @@ public class GameObjectTest {
     @Before
     public void setUp() throws SlickException {
         gameLoop = GameTestCtx.setup();
+    }
+    
+    @Test
+    public void gameObjectArgTest() {
+        ErrMsg err = new ErrMsg("Arguments wrong");
+        Throwable result = gameLoop.runInLoop(() -> {
+            GameObject g = new GameObject(0,0,"src/assets/spr_enemy1.png",0);
+            try{
+            float x = g.getX();
+            float y = g.getY();
+            Image i = g.getSprite();
+            int d = g.getDirection();
+            String s = g.getName();
+            }catch(Exception e){
+                throw err;
+            }
+        });
+        assertEquals("Did it work?", gameLoop.ok, result);
+    }
+    
+    @Test
+    public void gameObjectTest1() {
+        ErrMsg err = new ErrMsg("No sprite found");
+        Throwable result = gameLoop.runInLoop(() -> {
+            try{
+            GameObject g = new GameObject(0, 0,"");
+            Image i = g.getSprite();
+            } catch (Exception e){
+                throw err;
+            }
+        });
+
+        assertEquals("Did it work?", err, result);
     }
 
     @Test
@@ -52,6 +86,20 @@ public class GameObjectTest {
             Camera c = null;
             if (g.renderable(c)) {
                 throw new ErrMsg("Object shouldn't be renderable with a Camera that is null!");
+            }
+        });
+
+        assertEquals("Did it work?", gameLoop.ok, result);
+    }
+    
+     @Test
+    public void gameObjectRenderableTest3() {
+
+        Throwable result = gameLoop.runInLoop(() -> {
+            GameObject g = new GameObject(0, 2000);
+            Camera c = new Camera(0, 0);
+            if (g.renderable(c)) {
+                throw new ErrMsg("");
             }
         });
 
