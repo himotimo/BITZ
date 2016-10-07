@@ -12,32 +12,48 @@ import org.newdawn.slick.SlickException;
  *
  * @author Timo
  */
+/**
+ * Luokka hallinnoi pelin logiikkaa
+ */
 public class Logic {
+
     private float deltaspd;
     private ArrayList<GameObject> renderList;
     private Enemy[] enemies;
     private Player timo;
     private ArrayList<Collectible> collectList;
     private Walls walls;
-    
-    public Logic(ArrayList<GameObject> rlist, Player player){        
+
+    public Logic(ArrayList<GameObject> rlist, Player player) {
         walls = new Walls();
         renderList = rlist;
         collectList = new ArrayList<Collectible>();
         enemies = new Enemy[3];
         timo = player;
     }
-    
-    public void setDelta(float delta){
-        this.deltaspd=delta;
+
+    /**
+     * aseta delta
+     *
+     * @param delta float pelin delta
+     */
+    public void setDelta(float delta) {
+        this.deltaspd = delta;
     }
-    
-    public void playerLogicUpdate(){
+
+    /**
+     * päivitä pelaajaobjektin logiikka
+     */
+    public void playerLogicUpdate() {
         timo.move(deltaspd);
-        
+
     }
-    
-    public void enemyLogicUpdate() throws SlickException{
+
+    /**
+     * päivittää vihollisobjektien logiikan eli liikuttaa niitä lähemmäs
+     * pelaajaa
+     */
+    public void enemyLogicUpdate() throws SlickException {
         for (int i = 0; i < 3; i++) {   //enemy generation
             if (enemies[i] == null) {
                 enemies[i] = new Enemy(timo.getX(), timo.getY(), "src/assets/spr_enemy1.png");
@@ -55,10 +71,14 @@ public class Logic {
                 }
             }
         }
-        
+
     }
-    
-    public void projectileLogicUpdate() throws SlickException{
+
+    /**
+     * päivittää projectilejen logiikan eli liikuttaa niitä kohti niiden suuntaa
+     * ja tarkistaa onko niiden elinikä lopussa
+     */
+    public void projectileLogicUpdate() throws SlickException {
         Projectile p = timo.shoot(deltaspd);    //shooting
         if (p != null) {
             renderList.add(p);
@@ -72,13 +92,20 @@ public class Logic {
         }
         toBeDestroyed = null;
     }
-    
-    public void cameraLogicUpdate(Camera mainCamera){        
+
+    /**
+     * siirtää kameraa suhteessa pelaajan sijaintiin
+     */
+    public void cameraLogicUpdate(Camera mainCamera) {
         mainCamera.setX(timo.getX() - 200); //camera follow
         mainCamera.setY(timo.getY() - 200);
     }
-    
-    public void collectibleLogicUpdate(){
+
+    /**
+     * tarkistaa onko pelaajaobjekti lähellä kerättäviä tavaroita ja kerää ne
+     * pelaajalle mikäli ne ovat lähellä
+     */
+    public void collectibleLogicUpdate() {
         Collectible j = (Collectible) timo.collidesAny(collectList);    //collect item
         if (j != null) {
             if (timo.collect(j)) {
@@ -87,20 +114,26 @@ public class Logic {
                 //j = null;
             }
         }
-        
+
     }
-    
-    public void collectibleSetup() throws SlickException{
+
+    /**
+     * alustaa kerättävät tavarat
+     */
+    public void collectibleSetup() throws SlickException {
         Collectible crest = new Collectible(200, 200, "src/assets/spr_item_crest.png", "crest");
         Collectible stick = new Collectible(300, 300, "src/assets/spr_item_stick.png", "stick");
         renderList.add(crest);
         renderList.add(stick);
         collectList.add(crest);
         collectList.add(stick);
-        
+
     }
-    
-    public void wallsSetup(){
+
+    /**
+     * alustaa taustakentän
+     */
+    public void wallsSetup() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 GameObject wall = walls.getWallArray()[i][j];
@@ -110,5 +143,5 @@ public class Logic {
             }
         }
     }
-    
+
 }

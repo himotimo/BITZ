@@ -19,7 +19,6 @@ import org.newdawn.slick.SlickException;
 public class Collectible extends GameObject {
 
     private String name;
-    private int value;
 
     public Collectible(float nowx, float nowy, String sprpath, String itemname) throws SlickException {
         super(nowx, nowy, sprpath, itemname);

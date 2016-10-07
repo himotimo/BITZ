@@ -7,6 +7,7 @@ package bitzgame.bitz;
 
 import org.newdawn.slick.SlickException;
 
+
 /**
  *
  * @author Timo
