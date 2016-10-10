@@ -6,6 +6,7 @@
 package bitzgame.bitz;
 
 import java.util.ArrayList;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -44,8 +45,24 @@ public class Logic {
     /**
      * päivitä pelaajaobjektin logiikka
      */
-    public void playerLogicUpdate() {
+    public void playerLogicUpdate(GameContainer gc) throws SlickException {
+        timo.collidingWallDirection(walls);
         timo.move(deltaspd);
+        for (int i = 0; i < 3; i++) {
+            if (enemies[i] != null) {
+                if (enemies[i].getX() < timo.getX() + 10 && enemies[i].getX() > timo.getX()) {
+                    if (enemies[i].getY() < timo.getY() + 10 && enemies[i].getY() > timo.getY()) {
+                        timo.addToHealth(-1);
+                    }
+                }
+            }
+        }
+        if(timo.getHealth()<0){
+            timo.setDead(true);
+        }
+        if(timo.getDead()){
+            gc.reinit();
+        }
 
     }
 

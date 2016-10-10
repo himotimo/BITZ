@@ -71,7 +71,6 @@ public class BitzRenderer {
             g.drawString("|INVENTORY|", 20, 30);
             if (j != null) {
                 g.drawString("- " + j.getName() + " -", 30, 20 + var * 20);
-                System.out.println("renderöidään ruudulle");
             }
             var++;
         }

@@ -16,7 +16,6 @@ import org.newdawn.slick.SlickException;
 /**
  * Luokka antaa perusominaisuudet kaikille pelin objekteille
  */
-
 public class GameObject {
 
     protected float x;
@@ -25,6 +24,7 @@ public class GameObject {
     private Image sprite;
     private String name;
     protected int direction;
+    protected int cantmove;
 
     public GameObject(float nowx, float nowy) throws SlickException {
         x = nowx;
@@ -45,8 +45,8 @@ public class GameObject {
     }
 
     /**
-     * Metodi kertoo kuuluuko objektia renderöidä.
-     * jos se on "kuvaruudussa", niin sitä tulee renderöidä
+     * Metodi kertoo kuuluuko objektia renderöidä. jos se on "kuvaruudussa",
+     * niin sitä tulee renderöidä
      *
      * @param other pelin kamera
      *
@@ -68,9 +68,53 @@ public class GameObject {
         return false;
     }
 
+    public void collidingWallDirection(Walls walls) {
+        boolean moved = false;
+        GameObject[][] w = walls.getWallArray();
+        float thisx = this.getX();
+        float thisy = this.getY();
+        float otherx = 0;
+        float othery = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (w[i][j] != null) {
+                    otherx = w[i][j].getX();
+                    othery = w[i][j].getY();
+                    
+                    if (thisx > otherx && thisx <= otherx + 50 && thisy > othery && thisy <= othery + 5) {
+                        this.cantmove = 2; //cant move down
+                        moved = true;
+                        break;
+                    } else if (thisx >= otherx && thisx < otherx +5 && thisy > othery && thisy <= othery+50){
+                        this.cantmove =1; //cant move right
+                        moved = true;
+                        break;
+                    } else if(thisx > otherx && thisx <= otherx + 50 && thisy > othery+45 && thisy <= othery+50){
+                        this.cantmove = 0;
+                        moved = true;
+                        break;
+                    } else if (thisx >= otherx+45 && thisx < otherx +50 && thisy > othery && thisy <= othery+50){
+                        this.cantmove = 3;
+                        moved = true;
+                        break;
+                    }else{
+                        this.cantmove = 4;
+                    }
+                }
+            }
+            if (moved) {
+                break;
+            }
+        }
+    }
+
+    public int getCantMove() {
+        return this.cantmove;
+    }
+
     /**
      * Metodi kertoo törmääkö se other objektiin.
-     * 
+     *
      *
      * @param other toinen objekti
      *
@@ -94,7 +138,6 @@ public class GameObject {
      *
      * @return GameObject johon törmätään, muussa tapauksessa null
      */
-    
     public GameObject collidesAny(ArrayList<? extends GameObject> other) {
         for (GameObject j : other) {
             if (this.collidesWith(j)) {

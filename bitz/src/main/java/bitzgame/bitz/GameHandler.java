@@ -58,7 +58,7 @@ public class GameHandler {
         deltaspd /= gameslow; //makes the game run slower
         logiikka.setDelta(deltaspd);
         logiikka.enemyLogicUpdate();
-        logiikka.playerLogicUpdate();
+        logiikka.playerLogicUpdate(gc);
         logiikka.projectileLogicUpdate();
         logiikka.cameraLogicUpdate(mainCamera);
         logiikka.collectibleLogicUpdate();

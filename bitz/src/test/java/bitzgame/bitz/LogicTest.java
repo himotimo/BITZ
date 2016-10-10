@@ -11,6 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -39,8 +40,9 @@ public class LogicTest {
                 Input in = new Input(480);
                 Player p = new Player(0,0,"src/assets/spr_char1.png",0,in);
                 Logic l = new Logic(list,p);
+                GameContainer gc = gameLoop.getGameContainer();
                 l.setDelta((float)0.4);
-                l.playerLogicUpdate();
+                l.playerLogicUpdate(gc);
                 l.enemyLogicUpdate();
                 l.projectileLogicUpdate();
                 Camera c = new Camera(0,0);

@@ -95,6 +95,10 @@ class GameTestCtx extends BasicGame implements Runnable {
             System.out.println("Error: Can't initialize the Game Test Context.");
         }
     }
+    
+    public GameContainer getGameContainer(){
+        return this.container;
+    }
 
     public static GameTestCtx setup() throws SlickException {
         if (theOneContext == null) {
@@ -105,6 +109,8 @@ class GameTestCtx extends BasicGame implements Runnable {
         }
         return theOneContext;
     }
+    
+    
     
     public Throwable runInLoop(Test test) {
         try {

@@ -40,7 +40,7 @@ public class Main extends BasicGame {
     public static void main(String[] args) throws SlickException {
         try {
             AppGameContainer appgc;
-            appgc = new AppGameContainer(new Main("Simple Slick Game"));
+            appgc = new AppGameContainer(new Main("Bitz the game"));
             appgc.setDisplayMode(640, 480, false);
             appgc.start();
 
