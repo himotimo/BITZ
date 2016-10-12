@@ -8,6 +8,7 @@ package bitzgame.bitz;
 import java.util.ArrayList;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 /**
  *
@@ -24,17 +25,23 @@ public class GameObject {
     private Image sprite;
     private String name;
     protected int direction;
-    protected int cantmove;
+    protected int cantmove = 4;
+    private float xspd;
+    private float yspd;
 
     public GameObject(float nowx, float nowy) throws SlickException {
         x = nowx;
         y = nowy;
+        xspd = 0;
+        yspd = 0;
     }
 
     public GameObject(float nowx, float nowy, String sprpath) throws SlickException {
         x = nowx;
         y = nowy;
         sprite = new Image(sprpath);
+        xspd = 0;
+        yspd = 0;
     }
 
     public GameObject(float nowx, float nowy, String sprpath, int dir) throws SlickException {
@@ -42,6 +49,8 @@ public class GameObject {
         y = nowy;
         sprite = new Image(sprpath);
         direction = dir;
+        xspd = 0;
+        yspd = 0;
     }
 
     /**
@@ -68,8 +77,9 @@ public class GameObject {
         return false;
     }
 
-    public void collidingWallDirection(Walls walls) {
-        boolean moved = false;
+    public boolean collidingWall(Walls walls) {
+        Vector2f vector;
+        boolean collided = false;
         GameObject[][] w = walls.getWallArray();
         float thisx = this.getX();
         float thisy = this.getY();
@@ -80,32 +90,36 @@ public class GameObject {
                 if (w[i][j] != null) {
                     otherx = w[i][j].getX();
                     othery = w[i][j].getY();
-                    
-                    if (thisx > otherx && thisx <= otherx + 50 && thisy > othery && thisy <= othery + 5) {
-                        this.cantmove = 2; //cant move down
-                        moved = true;
-                        break;
-                    } else if (thisx >= otherx && thisx < otherx +5 && thisy > othery && thisy <= othery+50){
-                        this.cantmove =1; //cant move right
-                        moved = true;
-                        break;
-                    } else if(thisx > otherx && thisx <= otherx + 50 && thisy > othery+45 && thisy <= othery+50){
-                        this.cantmove = 0;
-                        moved = true;
-                        break;
-                    } else if (thisx >= otherx+45 && thisx < otherx +50 && thisy > othery && thisy <= othery+50){
-                        this.cantmove = 3;
-                        moved = true;
-                        break;
-                    }else{
-                        this.cantmove = 4;
+                    if ((thisx + this.xspd) >= otherx && (thisx + this.xspd) <= otherx + 50 && (thisy + this.yspd) >= othery && (thisy + this.yspd) <= othery + 50) {
+                        float thisXOrigo = thisx - (otherx + 25);
+                        float thisYOrigo = thisy - (othery + 25);
+                        vector = new Vector2f(thisXOrigo, thisYOrigo);
+                        int angle = (int) (vector.getTheta());
+                        if (angle >= 315 || angle < 45) {
+                            this.moveX(1);   //cant move left
+                            collided = true;
+                            break;
+                        } else if (angle >= 45 && angle < 135) {
+                            this.moveY(1);   //cant move down
+                            collided = true;
+                            break;
+                        } else if (angle >= 135 && angle < 225) {
+                            this.moveX(-1);  //cant move right
+                            collided = true;
+                            break;
+                        } else if (angle >= 225 && angle < 315) {
+                            this.moveY(-1);  //cant move up
+                            collided = true;
+                            break;
+                        }
                     }
                 }
             }
-            if (moved) {
-                break;
+            if (collided) {
+                return true;
             }
         }
+        return false;
     }
 
     public int getCantMove() {
@@ -152,6 +166,8 @@ public class GameObject {
         y = nowy;
         sprite = new Image(sprpath);
         name = itemname;
+        xspd = 0;
+        yspd = 0;
     }
 
     public String getName() {
@@ -204,6 +220,22 @@ public class GameObject {
 
     public void setDirection(int dir) {
         this.direction = dir;
+    }
+
+    public void setXspd(float f) {
+        this.xspd = f;
+    }
+
+    public float getXspd() {
+        return this.xspd;
+    }
+
+    public void setYspd(float f) {
+        this.yspd = f;
+    }
+
+    public float getYspd() {
+        return this.yspd;
     }
 
 }

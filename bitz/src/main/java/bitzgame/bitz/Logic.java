@@ -46,7 +46,6 @@ public class Logic {
      * päivitä pelaajaobjektin logiikka
      */
     public void playerLogicUpdate(GameContainer gc) throws SlickException {
-        timo.collidingWallDirection(walls);
         timo.move(deltaspd);
         for (int i = 0; i < 3; i++) {
             if (enemies[i] != null) {
@@ -159,6 +158,7 @@ public class Logic {
                 }
             }
         }
+        timo.setWalls(walls);
     }
 
 }

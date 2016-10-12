@@ -27,6 +27,8 @@ public class Player extends GameObject {
     private boolean tryShoot;
     private float bangCoolDown;
     private boolean dead;
+    private Walls walls;
+    private float playerspd=(float)1;
 
     public Player(float nowx, float nowy, String sprpath, int dir, Input in) throws SlickException {
         super(nowx, nowy, sprpath, dir);
@@ -38,6 +40,10 @@ public class Player extends GameObject {
         tryShoot = false;          //
         bangCoolDown = 0;               //cooldown timer of shooting
         dead = false;
+    }
+
+    public void setWalls(Walls w) {
+        this.walls = w;
     }
 
     public void setTryShoot(boolean b) {
@@ -103,41 +109,49 @@ public class Player extends GameObject {
     private float moveRight() {
         if (input.isKeyDown(Input.KEY_D)) {
             this.setDirection(1);
-            if (this.cantmove != 1) {
-                return 1;
+            if (!this.collidingWall(walls)) {
+                this.setXspd(this.playerspd);
+                return this.getXspd();
             }
         }
-        return 0;
+        this.setXspd(0);
+        return this.getXspd();
     }
 
     private float moveLeft() {
         if (input.isKeyDown(Input.KEY_A)) {
             this.setDirection(3);
-            if (this.cantmove != 3) {
-                return -1;
+            if (!this.collidingWall(walls)) {
+                this.setXspd(-this.playerspd);
+                return this.getXspd();
             }
         }
-        return 0;
+        this.setXspd(0);
+        return this.getXspd();
     }
 
     private float moveUp() {
         if (input.isKeyDown(Input.KEY_W)) {
             this.setDirection(0);
-            if (this.cantmove != 0) {
-                return -1;
+            if (!this.collidingWall(walls)) {
+                this.setYspd(-this.playerspd);
+                return this.getYspd();
             }
         }
-        return 0;
+        this.setYspd(0);
+        return this.getYspd();
     }
 
     private float moveDown() {
         if (input.isKeyDown(Input.KEY_S)) {
             this.setDirection(2);
-            if (this.cantmove != 2) {
-                return 1;
+            if (!this.collidingWall(walls)) {
+                this.setYspd(this.playerspd);
+                return this.getYspd();
             }
         }
-        return 0;
+        this.setYspd(0);
+        return this.getYspd();
     }
 
     public boolean collect(Collectible item) {

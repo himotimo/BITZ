@@ -74,7 +74,7 @@ public class Walls {
                 k = Integer.parseInt(numbers[j]);
                 wallsMap[i][j] = k;
                 if (k == 1) {
-                    wallArray[i][j] = new GameObject(i * 50, j * 50, "src/assets/spr_wall1.png");
+                    wallArray[j][i] = new GameObject(j * 50, i * 50, "src/assets/spr_wall1.png");   //vaihoin tällä rivillä it ja jt
                 }
             }
         }
