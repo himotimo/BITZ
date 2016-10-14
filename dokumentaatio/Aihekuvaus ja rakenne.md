@@ -25,9 +25,9 @@ periviä olioita. GameObject-luokka antaa perusominaisuudet kaikille olioille, k
 Pelaajahahmo on Player-luokan olio, jolla on liikutusta varten metodit x- ja y-arvojen muuttamiselle näppäinten painamisen mukaan. Muut liikkuvat oliot pelissä ovat Camera-olio, joka liikkuu pelaajan x:n ja y:n liimattuna, Enemy-oliot, jotka liikkuvat pelaajan x ja y:tä kohti, sekä Projectilet, joita Player pystyy ampua. Projectilet lentävät tietyn ajan pelaajan katsomaan suuntaan. Collectible-oliot pelaaja voi osuessaan kerätä Inventoryynsä ja niin "saa ne mukaansa". Seinät rakennetaan tekstitiedostosta lukemalla pelin alussa.
 	Renderöinti tapahtuu pitämällä listaa kaikista olioista, jotka ovat pelissä renderöitäviä. Mikäli listalla oleva olio on kameran "linssin" sisällä, niitä renderöidään suhteessa kameran sijaintiin.
 
-![luokkakaavio][luokkakaavio.png]
+![luokkakaavio][C:\Users\Timo\Documents\Koulou\Koodaus\BITZ\dokumentaatio\luokkakaavio.png]
 
-![init sekvenssikaavio][initkaavio.png]
+![init sekvenssikaavio][C:\Users\Timo\Documents\Koulou\Koodaus\BITZ\dokumentaatio\initkaavio.png]
 
-![shoot sekvenssikaavio][shootkaavio.png]
+![shoot sekvenssikaavio][C:\Users\Timo\Documents\Koulou\Koodaus\BITZ\dokumentaatio\shootkaavio.png]
 
