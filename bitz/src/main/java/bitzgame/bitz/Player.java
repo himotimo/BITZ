@@ -15,8 +15,6 @@ import org.newdawn.slick.Input;
 /**
  * Luokka hallinnoi pelaajaobjektia
  *
- *
- *
  */
 public class Player extends GameObject {
 
@@ -28,7 +26,7 @@ public class Player extends GameObject {
     private float bangCoolDown;
     private boolean dead;
     private Walls walls;
-    private float playerspd=(float)1;
+    private float playerspd = (float) 1;
 
     public Player(float nowx, float nowy, String sprpath, int dir, Input in) throws SlickException {
         super(nowx, nowy, sprpath, dir);
@@ -55,8 +53,6 @@ public class Player extends GameObject {
      *
      * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin
      * nopeus
-     *
-     *
      *
      */
     public void tryShoot(float deltaspd) throws SlickException {
@@ -106,6 +102,16 @@ public class Player extends GameObject {
         this.moveY(deltaspd * this.moveUp() + deltaspd * this.moveDown());
     }
 
+    /**
+     * Metodi tarkistaa, törmääkö pelaaja seinään ja jos ei, niin se nostaa
+     * x-tai y-speediä, jos liikkumisnäppäintä on painettu
+     *
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin
+     * nopeus
+     *
+     * @return float x- tai yspeed riippuen siitä, mihin suuntaan painetaan
+     *
+     */
     private float moveRight() {
         if (input.isKeyDown(Input.KEY_D)) {
             this.setDirection(1);
@@ -118,6 +124,16 @@ public class Player extends GameObject {
         return this.getXspd();
     }
 
+    /**
+     * Metodi tarkistaa, törmääkö pelaaja seinään ja jos ei, niin se nostaa
+     * x-tai y-speediä, jos liikkumisnäppäintä on painettu
+     *
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin
+     * nopeus
+     *
+     * @return float x- tai yspeed riippuen siitä, mihin suuntaan painetaan
+     *
+     */
     private float moveLeft() {
         if (input.isKeyDown(Input.KEY_A)) {
             this.setDirection(3);
@@ -130,6 +146,16 @@ public class Player extends GameObject {
         return this.getXspd();
     }
 
+    /**
+     * Metodi tarkistaa, törmääkö pelaaja seinään ja jos ei, niin se nostaa
+     * x-tai y-speediä, jos liikkumisnäppäintä on painettu
+     *
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin
+     * nopeus
+     *
+     * @return float x- tai yspeed riippuen siitä, mihin suuntaan painetaan
+     *
+     */
     private float moveUp() {
         if (input.isKeyDown(Input.KEY_W)) {
             this.setDirection(0);
@@ -142,6 +168,16 @@ public class Player extends GameObject {
         return this.getYspd();
     }
 
+    /**
+     * Metodi tarkistaa, törmääkö pelaaja seinään ja jos ei, niin se nostaa
+     * x-tai y-speediä, jos liikkumisnäppäintä on painettu
+     *
+     * @param deltaspd pelin deltaspeed, jolla asetetaan ampumisen cooldownin
+     * nopeus
+     *
+     * @return float x- tai yspeed riippuen siitä, mihin suuntaan painetaan
+     *
+     */
     private float moveDown() {
         if (input.isKeyDown(Input.KEY_S)) {
             this.setDirection(2);
@@ -154,6 +190,15 @@ public class Player extends GameObject {
         return this.getYspd();
     }
 
+    /**
+     * Metodi tarkistaa, törmääkö pelaaja seinään
+     *
+     * @param item on Collectible objekti, joka koitetaan laittaa inventoryyn
+     * nopeus
+     *
+     * @return boolean saatiinko item laitettua inventoryyn
+     *
+     */
     public boolean collect(Collectible item) {
         //check surroundings for collectibles XYs and if close,
         // put them into inventory and destroy them from the world

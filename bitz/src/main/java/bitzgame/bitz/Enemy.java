@@ -7,17 +7,15 @@ package bitzgame.bitz;
 
 import org.newdawn.slick.SlickException;
 
-
 /**
  *
  * @author Timo
  */
 /**
-     * Luokka hallinnoi vihollisobjekteja
-     *
-     * 
-     */
-
+ * Luokka hallinnoi vihollisobjekteja
+ *
+ *
+ */
 public class Enemy extends GameObject {
 
     private int health;
@@ -39,18 +37,16 @@ public class Enemy extends GameObject {
 
         health = 2;
     }
-    
+
     /**
      * Metodi liikuttaa vihollista pelaajaa kohti.
      *
      * @param other pelaajaobjekti
      * @param deltaspd pelin deltaspeed, jolla tasoitetaan objektin liikett
-     * 
-     * 
+     *
+     *
      *
      */
-    
-
     public void moveToPlayer(Player other, float deltaspd) {
         if (this.getX() < other.getX()) {
             this.moveX((float) spd * deltaspd);

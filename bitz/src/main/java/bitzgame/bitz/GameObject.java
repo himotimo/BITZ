@@ -53,6 +53,15 @@ public class GameObject {
         yspd = 0;
     }
 
+    public GameObject(float nowx, float nowy, String sprpath, String itemname) throws SlickException {
+        x = nowx;
+        y = nowy;
+        sprite = new Image(sprpath);
+        name = itemname;
+        xspd = 0;
+        yspd = 0;
+    }
+
     /**
      * Metodi kertoo kuuluuko objektia renderöidä. jos se on "kuvaruudussa",
      * niin sitä tulee renderöidä
@@ -77,6 +86,15 @@ public class GameObject {
         return false;
     }
 
+    /**
+     * Metodi kertoo törmääkö pelaajaobjekti seinään jos törmätään, muutetaan
+     * xspeed tai yspeed nollaksi riippuen siitä, miltä puolelta seinään
+     * törmätään
+     *
+     * @param walls on Walls-luokan objekti
+     *
+     * @return true tai false törmätäänkö tällä hetkellä johonkin seinään
+     */
     public boolean collidingWall(Walls walls) {
         Vector2f vector;
         boolean collided = false;
@@ -159,15 +177,6 @@ public class GameObject {
             }
         }
         return null;
-    }
-
-    public GameObject(float nowx, float nowy, String sprpath, String itemname) throws SlickException {
-        x = nowx;
-        y = nowy;
-        sprite = new Image(sprpath);
-        name = itemname;
-        xspd = 0;
-        yspd = 0;
     }
 
     public String getName() {

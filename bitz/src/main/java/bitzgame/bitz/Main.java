@@ -25,7 +25,6 @@ public class Main extends BasicGame {
         gamehandler = new GameHandler();
         gamehandler.init(gc);
     }
-    
 
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {

@@ -27,6 +27,11 @@ import org.newdawn.slick.SlickException;
  *
  * @author Timo
  */
+/**
+ * Luokka hallinnoi seinäobjekteja
+ *
+ *
+ */
 public class Walls {
 
     GameObject[][] wallArray;
@@ -52,10 +57,7 @@ public class Walls {
     /**
      * Metodi luo peliin seiniä/taustatiiliä tekstifileä lukemalla
      *
-     * 
-     *
      */
-    
     public void setupArray() throws SlickException {
         int[][] wallsMap = new int[height][width];
         Scanner scanner = null;

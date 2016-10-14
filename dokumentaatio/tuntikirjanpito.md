@@ -19,4 +19,5 @@ Päivä | Tunnit | Kuvaus
 7.10.2016 | 2h | testien tekoa
 10.10.2016 | 3h | koodausta
 13.10.2016 | 3h | koodausta
+14.10.2016 | 4h | dokumentointia
 ... | ... | ...

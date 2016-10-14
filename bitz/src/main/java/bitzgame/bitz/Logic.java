@@ -56,10 +56,10 @@ public class Logic {
                 }
             }
         }
-        if(timo.getHealth()<0){
+        if (timo.getHealth() < 0) {
             timo.setDead(true);
         }
-        if(timo.getDead()){
+        if (timo.getDead()) {
             gc.reinit();
         }
 

@@ -11,6 +11,11 @@ import org.newdawn.slick.SlickException;
  *
  * @author Timo
  */
+/**
+ * Luokka hallinnoi pelaajan ampumia ammuksia
+ *
+ *
+ */
 public class Projectile extends GameObject {
 
     public int life;
@@ -28,6 +33,12 @@ public class Projectile extends GameObject {
         this.life -= 1;
     }
 
+    /**
+     * Metodi liikuttaa ammuttuja ammuksia niiden directionia kohti
+     *
+     * @param deltaspd on pelin deltaspeed
+     *
+     */
     public void move(float deltaspd) {
         if (direction == 0) {
             this.moveY(-2 * deltaspd);
