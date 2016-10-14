@@ -28,7 +28,7 @@ Pelaajahahmo on Player-luokan olio, jolla on liikutusta varten metodit x- ja y-a
 ![luokkakaavio][lk1]
 [lk1]: https://raw.githubusercontent.com/himotimo/BITZ/master/dokumentaatio/Luokkakaavio.png
 
-![init sekvenssikaavio][https://raw.githubusercontent.com/himotimo/BITZ/master/dokumentaatio/initkaavio.png]
+![init sekvenssikaavio](https://raw.githubusercontent.com/himotimo/BITZ/master/dokumentaatio/initkaavio.png)
 
 ![shoot sekvenssikaavio][https://raw.githubusercontent.com/himotimo/BITZ/master/dokumentaatio/shootkaavio.png]
 
