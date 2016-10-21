@@ -24,6 +24,7 @@ public class Logic {
     private Player timo;
     private ArrayList<Collectible> collectList;
     private Walls walls;
+    private Finish finish;
 
     public Logic(ArrayList<GameObject> rlist, Player player) {
         walls = new Walls();
@@ -72,7 +73,7 @@ public class Logic {
     public void enemyLogicUpdate() throws SlickException {
         for (int i = 0; i < 3; i++) {   //enemy generation
             if (enemies[i] == null) {
-                enemies[i] = new Enemy(timo.getX(), timo.getY(), "src/assets/spr_enemy1.png");
+                enemies[i] = new Enemy(timo.getX(), timo.getY(), "src/assets/enemy.png");
                 renderList.add(enemies[i]);
             }
             if (enemies[i] != null) {   //enemy movement and destruction
@@ -130,28 +131,42 @@ public class Logic {
                 //j = null;
             }
         }
+    }
 
+    public void finishUpdate(GameContainer gc) {
+        if (timo.getCollected() == 3) {
+            if (timo.collidesWith(finish)) {
+                gc.exit();
+            }
+        }
     }
 
     /**
      * alustaa kerättävät tavarat
      */
     public void collectibleSetup() throws SlickException {
-        Collectible crest = new Collectible(200, 200, "src/assets/spr_item_crest.png", "crest");
-        Collectible stick = new Collectible(300, 300, "src/assets/spr_item_stick.png", "stick");
+        Collectible crest = new Collectible(200, 300, "src/assets/punainen.png", "red");
+        Collectible stick = new Collectible(200, 1250, "src/assets/sininen.png", "blue");
+        Collectible x = new Collectible(1100, 400, "src/assets/keltainen.png", "yellow");
         renderList.add(crest);
         renderList.add(stick);
+        renderList.add(x);
+        collectList.add(x);
         collectList.add(crest);
         collectList.add(stick);
+    }
 
+    public void finishSetup() throws SlickException {
+        finish = new Finish(250, 850, "src/assets/alttari.png");
+        renderList.add(finish);
     }
 
     /**
      * alustaa taustakentän
      */
     public void wallsSetup() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
                 GameObject wall = walls.getWallArray()[i][j];
                 if (wall != null) {
                     renderList.add(wall);

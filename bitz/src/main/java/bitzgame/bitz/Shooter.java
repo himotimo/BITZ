@@ -44,7 +44,7 @@ public class Shooter {
     }
 
     public Projectile shoot(float startX, float startY, int dir) throws SlickException {
-        Projectile projectile = new Projectile(startX, startY, "src/assets/spr_projectile.png", dir);
+        Projectile projectile = new Projectile(startX, startY, "src/assets/Bullet.png", dir);
         this.projectiles.add(projectile);
         return projectile;
     }

@@ -52,12 +52,15 @@ public class GameHandler {
         renderList = new ArrayList<GameObject>();
         input = new Input(480);
         gameslow = 4; //the bigger value the slower game is. used to divide delta.
-        timo = new Player(0, 0, "src/assets/spr_char1.png", 0, input);
+        timo = new Player(-50, -50, "src/assets/ukkeli.png", 0, input);
+        timo.setHeight(32);
+        timo.setWidth(32);
         renderer = new BitzRenderer(renderList);
 
         logiikka = new Logic(renderList, timo);
         logiikka.wallsSetup();
         logiikka.collectibleSetup();
+        logiikka.finishSetup();
     }
 
     /**
@@ -77,6 +80,7 @@ public class GameHandler {
         logiikka.projectileLogicUpdate();
         logiikka.cameraLogicUpdate(mainCamera);
         logiikka.collectibleLogicUpdate();
+        logiikka.finishUpdate(gc);
     }
 
     /**

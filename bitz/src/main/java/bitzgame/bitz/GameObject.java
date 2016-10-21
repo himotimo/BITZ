@@ -28,6 +28,8 @@ public class GameObject {
     protected int cantmove = 4;
     private float xspd;
     private float yspd;
+    private int width;
+    private int height;
 
     public GameObject(float nowx, float nowy) throws SlickException {
         x = nowx;
@@ -95,39 +97,52 @@ public class GameObject {
      *
      * @return true tai false törmätäänkö tällä hetkellä johonkin seinään
      */
-    public boolean collidingWall(Walls walls) {
-        Vector2f vector;
+    public boolean collidingWallX(Walls walls) {
         boolean collided = false;
         GameObject[][] w = walls.getWallArray();
         float thisx = this.getX();
         float thisy = this.getY();
         float otherx = 0;
         float othery = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
                 if (w[i][j] != null) {
                     otherx = w[i][j].getX();
+                    int otherHeight = w[i][j].getHeight();
                     othery = w[i][j].getY();
-                    if ((thisx + this.xspd) >= otherx && (thisx + this.xspd) <= otherx + 50 && (thisy + this.yspd) >= othery && (thisy + this.yspd) <= othery + 50) {
-                        float thisXOrigo = thisx - (otherx + 25);
-                        float thisYOrigo = thisy - (othery + 25);
-                        vector = new Vector2f(thisXOrigo, thisYOrigo);
-                        int angle = (int) (vector.getTheta());
-                        if (angle >= 315 || angle < 45) {
-                            this.moveX(1);   //cant move left
-                            collided = true;
+                    int otherWidth = w[i][j].getWidth();
+                    if ((thisx + this.xspd * 2 + this.getWidth()) > otherx && (thisx + this.xspd * 2) < otherx + otherWidth && (thisy + this.getHeight()) > othery && (thisy) < othery + otherHeight) {
+                        collided = true;
+                        if (collided) {
                             break;
-                        } else if (angle >= 45 && angle < 135) {
-                            this.moveY(1);   //cant move down
-                            collided = true;
-                            break;
-                        } else if (angle >= 135 && angle < 225) {
-                            this.moveX(-1);  //cant move right
-                            collided = true;
-                            break;
-                        } else if (angle >= 225 && angle < 315) {
-                            this.moveY(-1);  //cant move up
-                            collided = true;
+                        }
+                    }
+                }
+            }
+            if (collided) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean collidingWallY(Walls walls) {
+        boolean collided = false;
+        GameObject[][] w = walls.getWallArray();
+        float thisx = this.getX();
+        float thisy = this.getY();
+        float otherx = 0;
+        float othery = 0;
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
+                if (w[i][j] != null) {
+                    otherx = w[i][j].getX();
+                    int otherWidth = w[i][j].getWidth();
+                    othery = w[i][j].getY();
+                    int otherHeight = w[i][j].getHeight();
+                    if ((thisx + this.getWidth()) > otherx && thisx < otherx + otherWidth && (thisy + this.yspd * 2 + this.getHeight()) > othery && (thisy + this.yspd * 2) < othery + otherHeight) {
+                        collided = true;
+                        if (collided) {
                             break;
                         }
                     }
@@ -245,6 +260,22 @@ public class GameObject {
 
     public float getYspd() {
         return this.yspd;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public void setWidth(int w) {
+        this.width = w;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(int h) {
+        this.height = h;
     }
 
 }

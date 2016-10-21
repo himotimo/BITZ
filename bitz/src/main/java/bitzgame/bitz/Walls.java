@@ -39,8 +39,8 @@ public class Walls {
     int height;
 
     public Walls() {
-        width = 10;
-        height = 10;
+        width = 30;
+        height = 30;
         wallArray = new GameObject[height][width];
         try {
             setupArray();
@@ -76,7 +76,9 @@ public class Walls {
                 k = Integer.parseInt(numbers[j]);
                 wallsMap[i][j] = k;
                 if (k == 1) {
-                    wallArray[j][i] = new GameObject(j * 50, i * 50, "src/assets/spr_wall1.png");   //vaihoin tällä rivillä it ja jt
+                    wallArray[j][i] = new GameObject(j * 50, i * 50, "src/assets/seina_2.png");   //vaihoin tällä rivillä it ja jt
+                    wallArray[j][i].setHeight(50);
+                    wallArray[j][i].setWidth(50);
                 }
             }
         }

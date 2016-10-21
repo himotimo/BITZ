@@ -27,6 +27,7 @@ public class Player extends GameObject {
     private boolean dead;
     private Walls walls;
     private float playerspd = (float) 1;
+    private int collected;
 
     public Player(float nowx, float nowy, String sprpath, int dir, Input in) throws SlickException {
         super(nowx, nowy, sprpath, dir);
@@ -38,6 +39,7 @@ public class Player extends GameObject {
         tryShoot = false;          //
         bangCoolDown = 0;               //cooldown timer of shooting
         dead = false;
+        collected = 0;
     }
 
     public void setWalls(Walls w) {
@@ -115,8 +117,8 @@ public class Player extends GameObject {
     private float moveRight() {
         if (input.isKeyDown(Input.KEY_D)) {
             this.setDirection(1);
-            if (!this.collidingWall(walls)) {
-                this.setXspd(this.playerspd);
+            this.setXspd(this.playerspd);
+            if (!this.collidingWallX(walls)) {
                 return this.getXspd();
             }
         }
@@ -137,8 +139,8 @@ public class Player extends GameObject {
     private float moveLeft() {
         if (input.isKeyDown(Input.KEY_A)) {
             this.setDirection(3);
-            if (!this.collidingWall(walls)) {
-                this.setXspd(-this.playerspd);
+            this.setXspd(-this.playerspd);
+            if (!this.collidingWallX(walls)) {
                 return this.getXspd();
             }
         }
@@ -159,8 +161,9 @@ public class Player extends GameObject {
     private float moveUp() {
         if (input.isKeyDown(Input.KEY_W)) {
             this.setDirection(0);
-            if (!this.collidingWall(walls)) {
-                this.setYspd(-this.playerspd);
+            this.setYspd(-this.playerspd);
+            if (!this.collidingWallY(walls)) {
+
                 return this.getYspd();
             }
         }
@@ -181,8 +184,8 @@ public class Player extends GameObject {
     private float moveDown() {
         if (input.isKeyDown(Input.KEY_S)) {
             this.setDirection(2);
-            if (!this.collidingWall(walls)) {
-                this.setYspd(this.playerspd);
+            this.setYspd(this.playerspd);
+            if (!this.collidingWallY(walls)) {
                 return this.getYspd();
             }
         }
@@ -202,7 +205,15 @@ public class Player extends GameObject {
     public boolean collect(Collectible item) {
         //check surroundings for collectibles XYs and if close,
         // put them into inventory and destroy them from the world
-        return this.inventory.put(item);
+        boolean b = this.inventory.put(item);
+        if (b) {
+            this.collected += 1;
+        }
+        return b;
+    }
+
+    public int getCollected() {
+        return this.collected;
     }
 
     public Inventory getInventory() {
