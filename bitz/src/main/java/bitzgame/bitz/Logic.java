@@ -164,12 +164,14 @@ public class Logic {
     /**
      * alustaa taustakentän
      */
-    public void wallsSetup() {
+    public void wallsSetup() throws SlickException {
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 30; j++) {
                 GameObject wall = walls.getWallArray()[i][j];
                 if (wall != null) {
                     renderList.add(wall);
+                } else {
+                    renderList.add(new GameObject(i * 50, j* 50, "src/assets/seina.png"));
                 }
             }
         }
